@@ -14,7 +14,7 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Text style={[styles.largeText, styles.textStyle]}>San Francisco</Text>
         <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
-        <Text style={[styles.largeText, styles.textStyle]}>24</Text>
+        <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
 
         <TextInput
           autoCorrect={false}
@@ -23,6 +23,7 @@ export default class App extends React.Component {
           style={styles.textInput}
           clearButtonMode="always"
         />
+        <KeyboardAvoidingView/>
       </View>
     );
   }
