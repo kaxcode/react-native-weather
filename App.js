@@ -1,12 +1,12 @@
-import React from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
+import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
   KeyboardAvoidingView,
   Platform,
-  TextInput, 
-} from 'react-native';
+  TextInput
+} from "react-native";
 
 export default class App extends React.Component {
   render() {
@@ -23,7 +23,7 @@ export default class App extends React.Component {
           style={styles.textInput}
           clearButtonMode="always"
         />
-        <KeyboardAvoidingView/>
+        <KeyboardAvoidingView />
       </View>
     );
   }
@@ -32,28 +32,28 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center"
   },
   textStyle: {
-    textAlign: 'center',
-    fontFamily: Platform.OS === 'ios' ? 'AvenirNext-Regular' : 'Roboto',
+    textAlign: "center",
+    fontFamily: Platform.OS === "ios" ? "AvenirNext-Regular" : "Roboto"
   },
   largeText: {
-    fontSize: 44,
+    fontSize: 44
   },
   smallText: {
-    fontSize: 18,
+    fontSize: 18
   },
   textInput: {
-    backgroundColor: '#666',
-    color: 'white',
+    backgroundColor: "#666",
+    color: "white",
     height: 40,
     width: 300,
     marginTop: 20,
     marginHorizontal: 20,
     paddingHorizontal: 10,
-    alignSelf: 'center',
+    alignSelf: "center"
   }
 });
