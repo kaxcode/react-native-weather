@@ -48,9 +48,16 @@ const styles = StyleSheet.create({
     height: null,
     resizeMode: 'cover',
   },
+  detailsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    paddingHorizontal: 20,
+  },
   textStyle: {
     textAlign: "center",
-    fontFamily: Platform.OS === "ios" ? "AvenirNext-Regular" : "Roboto"
+    fontFamily: Platform.OS === "ios" ? "AvenirNext-Regular" : "Roboto",
+    color: 'white',
   },
   largeText: {
     fontSize: 44
