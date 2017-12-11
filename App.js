@@ -3,23 +3,33 @@ import {
   StyleSheet,
   Text,
   View,
+  ImageBackground,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+
+import getImageForWeather from './utils/getImageForWeather';
 
 import SearchInput from './components/SearchInput';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={[styles.largeText, styles.textStyle]}>San Francisco</Text>
-        <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
-        <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
+      <KeyboardAvoidingView style={styles.container} behavior='padding'>
+      <ImageBackground
+        source={getImageForWeather('Clear')}
+        style={styles.imageContinaer}
+        imageStyle={styles.image}
+      >
+          <View style={styles.detailContainer}>
+            <Text style={[styles.largeText, styles.textStyle]}>San Francisco</Text>
+            <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
+            <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
 
-        <SearchInput placeholder="Search any City" />
-        <KeyboardAvoidingView />
-      </View>
+            <SearchInput placeholder="Search any City" />
+          </View>
+        </ImageBackground>
+      </KeyboardAvoidingView>
     );
   }
 }
