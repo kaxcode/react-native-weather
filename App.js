@@ -18,7 +18,7 @@ export default class App extends React.Component {
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
       <ImageBackground
         source={getImageForWeather('Clear')}
-        style={styles.imageContinaer}
+        style={styles.imageContainer}
         imageStyle={styles.image}
       >
           <View style={styles.detailContainer}>
