@@ -21,7 +21,7 @@ export default class App extends React.Component {
         style={styles.imageContainer}
         imageStyle={styles.image}
       >
-          <View style={styles.detailContainer}>
+          <View style={styles.detailsContainer}>
             <Text style={[styles.largeText, styles.textStyle]}>San Francisco</Text>
             <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
             <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
