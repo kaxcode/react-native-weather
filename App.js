@@ -14,6 +14,7 @@ import SearchInput from './components/SearchInput';
 
 export default class App extends React.Component {
   render() {
+    const location = 'San Francisco'
     return (
       <KeyboardAvoidingView style={styles.container} behavior='padding'>
       <ImageBackground
@@ -22,7 +23,7 @@ export default class App extends React.Component {
         imageStyle={styles.image}
       >
           <View style={styles.detailsContainer}>
-            <Text style={[styles.largeText, styles.textStyle]}>San Francisco</Text>
+            <Text style={[styles.largeText, styles.textStyle]}>{location}</Text>
             <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
             <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
 
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   textStyle: {
-    textAlign: "center",
+    textAlign: 'center',
     fontFamily: Platform.OS === "ios" ? "AvenirNext-Regular" : "Roboto",
     color: 'white',
   },
