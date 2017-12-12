@@ -6,8 +6,15 @@ import {
 } from "react-native";
 
 export default class SearchInput extends React.Component {
-  handleChangeText = (newLocation) => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: '',
+    };
+  }
 
+  handleChangeText = (newLocation) => {
+    this.props.location = newLocation;
   }
 
   render() {
