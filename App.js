@@ -13,6 +13,19 @@ import getImageForWeather from './utils/getImageForWeather';
 import SearchInput from './components/SearchInput';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: 'San Francisco'
+    };
+  }
+
+  handleUpdateLocation = city => {
+    this.setState({
+      location: city,
+    });
+  }
+
   render() {
     const location = 'San Francisco'
     return (
