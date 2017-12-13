@@ -13,8 +13,8 @@ export default class SearchInput extends React.Component {
     };
   }
 
-  handleChangeText = (newLocation) => {
-    this.props.location = newLocation;
+  handleChangeText = (text) => {
+    this.setState = { text };
   }
 
   render() {
