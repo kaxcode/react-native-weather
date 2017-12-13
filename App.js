@@ -27,7 +27,7 @@ export default class App extends React.Component {
             <Text style={[styles.smallText, styles.textStyle]}>Light Cloud</Text>
             <Text style={[styles.largeText, styles.textStyle]}>24°</Text>
 
-            <SearchInput placeholder="Search any City" />
+            <SearchInput placeholder="Search any City" onSubmit={this.hanldeUpdateLocation}/>
           </View>
         </ImageBackground>
       </KeyboardAvoidingView>
