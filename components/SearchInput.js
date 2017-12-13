@@ -1,9 +1,6 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  TextInput,
-} from "react-native";
+import { StyleSheet, TextInput, View } from 'react-native';
+import PropTypes from 'prop-types';
 
 export default class SearchInput extends React.Component {
   constructor(props) {
@@ -13,9 +10,9 @@ export default class SearchInput extends React.Component {
     };
   }
 
-  handleChangeText = (text) => {
-    this.setState = { text };
-  }
+  handleChangeText = text => {
+    this.setState({ text });
+  };
 
   handleSubmitEditing = () => {
     const { onSubmit } = this.props;
@@ -24,8 +21,8 @@ export default class SearchInput extends React.Component {
     if (!text) return;
 
     onSubmit(text);
-    this.setState({ text: ''});
-  }
+    this.setState({ text: '' });
+  };
 
   render() {
     const { placeholder } = this.props;
@@ -36,11 +33,11 @@ export default class SearchInput extends React.Component {
         <TextInput
           autoCorrect={false}
           value={text}
-          placeholder={ placeholder }
-          placeholderTextColor='white'
-          underlineColorAndroid='transparent'
+          placeholder={placeholder}
+          placeholderTextColor="white"
+          underlineColorAndroid="transparent"
           style={styles.textInput}
-          clearButtonMode='always'
+          clearButtonMode="always"
           onChangeText={this.handleChangeText}
           onSubmitEditing={this.handleSubmitEditing}
         />
@@ -48,6 +45,15 @@ export default class SearchInput extends React.Component {
     );
   }
 }
+
+SearchInput.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+};
+
+SearchInput.defaultProps = {
+  placeholder: '',
+};
 
 const styles = StyleSheet.create({
   container: {
