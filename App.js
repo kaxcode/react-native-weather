@@ -18,7 +18,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: 'San Francisco',
+      loading: false,
+      error: false,
+      location: '',
+      temperature: 0,
+      weather: '',
     };
   }
 
