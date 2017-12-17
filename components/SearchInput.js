@@ -1,71 +1,140 @@
-import React from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
-import PropTypes from 'prop-types';
+import React from "react";
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+  ActivityIndicator,
+  StatusBar
+} from "react-native";
 
-export default class SearchInput extends React.Component {
+import { fetchLocationId, fetchWeather } from "./utils/api";
+import getImageForWeather from "./utils/getImageForWeather";
+
+import SearchInput from "./components/SearchInput";
+
+export default class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      text: '',
+      loading: false,
+      error: false,
+      location: "",
+      temperature: 0,
+      weather: ""
     };
   }
 
-  handleChangeText = text => {
-    this.setState({ text });
-  };
+  componentDidMount() {
+    this.handleUpdateLocation("San Francisco");
+  }
 
-  handleSubmitEditing = () => {
-    const { onSubmit } = this.props;
-    const { text } = this.state;
+  handleUpdateLocation = async city => {
+    if (!city) return;
 
-    if (!text) return;
+    this.setState({ loading: true }, async () => {
+      try {
+        const locationId = await fetchLocationId(city);
+        const { location, weather, temperature } = await fetchWeather(
+          locationId
+        );
 
-    onSubmit(text);
-    this.setState({ text: '' });
+        this.setState({
+          loading: false,
+          error: false,
+          location,
+          weather,
+          temperature
+        });
+      } catch (e) {
+        this.setState({
+          loading: false,
+          error: true
+        });
+      }
+    });
   };
 
   render() {
-    const { placeholder } = this.props;
-    const { text } = this.state;
+    const { loading, error, location, weather, temperature } = this.state;
 
     return (
-      <View style={styles.container}>
-        <TextInput
-          autoCorrect={false}
-          value={text}
-          placeholder={placeholder}
-          placeholderTextColor="white"
-          underlineColorAndroid="transparent"
-          style={styles.textInput}
-          clearButtonMode="always"
-          onChangeText={this.handleChangeText}
-          onSubmitEditing={this.handleSubmitEditing}
-        />
-      </View>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
+        <StatusBar barStyle="light-content" />
+        <ImageBackground
+          source={getImageForWeather(weather)}
+          style={styles.imageContainer}
+          imageStyle={styles.image}
+        >
+          <View style={styles.detailsContainer}>
+            <ActivityIndicator animating={loading} color="white" size="large" />
+
+            {!loading && (
+              <View>
+                {error && (
+                  <Text style={[styles.smallText, styles.textStyle]}>
+                    Could not load weather, please try a different city.
+                  </Text>
+                )}
+
+                {!error && (
+                  <View>
+                    <Text style={[styles.largeText, styles.textStyle]}>
+                      {location}
+                    </Text>
+                    <Text style={[styles.smallText, styles.textStyle]}>
+                      {weather}
+                    </Text>
+                    <Text style={[styles.largeText, styles.textStyle]}>
+                      {`${Math.round(temperature)}Â°`}
+                    </Text>
+                  </View>
+                )}
+
+                <SearchInput
+                  placeholder="Search any city"
+                  onSubmit={this.handleUpdateLocation}
+                />
+              </View>
+            )}
+          </View>
+        </ImageBackground>
+      </KeyboardAvoidingView>
     );
   }
 }
-
-SearchInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  placeholder: PropTypes.string,
-};
-
-SearchInput.defaultProps = {
-  placeholder: '',
-};
-
 const styles = StyleSheet.create({
   container: {
-    height: 40,
-    marginTop: 20,
-    backgroundColor: '#666',
-    marginHorizontal: 40,
-    paddingHorizontal: 10,
-    borderRadius: 5,
-  },
-  textInput: {
     flex: 1,
-    color: 'white',
+    backgroundColor: "#34495E"
   },
+  imageContainer: {
+    flex: 1
+  },
+  image: {
+    flex: 1,
+    width: null,
+    height: null,
+    resizeMode: "cover"
+  },
+  detailsContainer: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.2)",
+    paddingHorizontal: 20
+  },
+  textStyle: {
+    textAlign: "center",
+    fontFamily: Platform.OS === "ios" ? "AvenirNext-Regular" : "Roboto",
+    color: "white"
+  },
+  largeText: {
+    fontSize: 44
+  },
+  smallText: {
+    fontSize: 18
+  }
 });
