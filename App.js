@@ -12,7 +12,6 @@ import {
 
 import getImageForWeather from './utils/getImageForWeather';
 import { fetchLocationId, fetchWeather } from './utils/api';
-import getImageForWeather from './utils/getImageForWeather';
 
 import SearchInput from './components/SearchInput';
 
